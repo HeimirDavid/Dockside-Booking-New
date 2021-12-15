@@ -1,0 +1,345 @@
+﻿@model docside_bookingview_2.ViewModels.RoomBooking
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore
+@using docside_bookingview_2.Areas.Identity.Data
+
+<link rel="stylesheet" href="~/fullcalendar/lib/main.css" />
+<link rel="stylesheet" href="~/css/fullcalendarCustom.css" />
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    string classAdminContainer = "";
+    string classDisplayNone = "";
+}
+
+
+@*@if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+    {
+        classAdminContainer = "content-wrapper";
+    }
+    else
+    {
+        classDisplayNone = "d-none";
+    }*@
+
+
+<div @*class="@classAdminContainer"*@>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-10 offset-1 col-md-12  offset-md-0">
+                <h3 class="pt-5 create-title text-uppercase">@Model.Room.strRoomName</h3>
+
+                <h4 class="create-title mt-5">BOKNING SOM EDITERAS.</h4>
+                <p><strong>Starttid:</strong> @ViewBag.BookingToEdit.datStartBooking.ToShortDateString() kl: @ViewBag.BookingToEdit.datStartBooking.ToShortTimeString()</p>
+                <p><strong>Sluttid:</strong> @ViewBag.BookingToEdit.datEndBooking.ToShortDateString() kl: @ViewBag.BookingToEdit.datEndBooking.ToShortTimeString()</p>
+                <hr />
+            </div>
+
+
+        </div>
+
+
+
+        <div class="row calendar-booking-row">
+            <div class="col-10 offset-1 col-md-7 offset-md-0">
+
+                <div id="calendar"></div>
+            </div>
+            <div class="col-10 offset-1 col-md-4 offset-md-1 mt-5">
+                <p class="mt-5"><strong>Heldagspris:</strong> @Model.Room.dcmWholeDay kr</p>
+                <p><strong>Halvdagspris:</strong> @Model.Room.dcmHalfDay kr</p>
+                <p><strong>Pris per timme:</strong> @Model.Room.dcmHour kr</p>
+                <p><strong>Internkundsrabatt:</strong> @Model.Room.dcmInternalDiscount %</p>
+                <form asp-controller="Booking" asp-action="AdminBookingEdit" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label step="2" asp-for="@Model.Booking.datStartBooking"></label>
+                        <input readonly id="start_time" placeholder="Välj startdatum och tid" asp-for="@Model.Booking.datStartBooking" class="form-control" />
+                        <span asp-validation-for="@Model.Booking.datStartBooking" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Booking.datEndBooking"></label>
+                        <input readonly id="end_time" placeholder="Välj slutdatum och tid" asp-for="@Model.Booking.datEndBooking" class="form-control" />
+                        <span asp-validation-for="@Model.Booking.datEndBooking" class="text-danger"></span>
+                    </div>
+
+                    <!--<div class="form-group">
+                        <label>Special pris</label>
+                        <input id="special_price" name="special_price" placeholder="Skriv in önskat pris" type="number" class="form-control" />-->
+                    @*<span asp-validation-for="@Model.Booking.datEndBooking" class="text-danger"></span>*@
+                    <!--</div>-->
+
+                    <div class="form-group mt-3 @classDisplayNone">
+                        <label>Användare - Email</label><br />
+
+                        <select class="searchableDropDown w-100 pb-2" name="userChosenByAdmin" id="userChosenByAdmin">
+                            @foreach (var item in Model.Users)
+                            {
+                                if (@ViewBag.singleBookingWithUser.User.Id == item.Id)
+                                {
+                                    <option selected value="@item.Id">@item.Email</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Email</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+
+
+
+                    <input hidden asp-for="Room.Id" class="form-control" />
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary mb-5" data-toggle="modal" data-target="#confirmBooking">
+                        Boka
+                    </button>
+
+
+                    <span class="btn btn-secondary mb-5 ml-4" id="clear_booking">Rensa</span>
+
+
+
+                    <!-- Modal -->
+                    <div class="modal fade mt-5" id="confirmBooking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Bekräfta Bokning</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Rum - @Model.Room.strRoomName</p>
+
+                                    <label step="2" asp-for="@Model.Booking.datStartBooking"></label>
+                                    <input readonly id="confirm_starttime" placeholder="Välj startdatum och tid" asp-for="@Model.Booking.datStartBooking" class="form-control" />
+                                    <br />
+                                    <label step="2" asp-for="@Model.Booking.datEndBooking"></label>
+                                    <input readonly id="confirm_endtime" placeholder="Välj startdatum och tid" asp-for="@Model.Booking.datEndBooking" class="form-control" />
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Stäng</button>
+                                    <button type="submit" class="btn btn-primary">Bekräfta</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+<!-- Flatpickr    ----  DISABLED-->
+@*<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>*@
+
+@*<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.1.0/main.min.js"></script>*@
+
+
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/core/locales-all.min.js" integrity="sha512-VsrFSGgqerN0+6shpMgjAs+YVNWb9OWO5mi+Z9Itwe0Di12J/yiK15RzocX4iI3eRuu7RUDXz/I5iQ6D8DMd9w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="@Html.Raw("https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@5.10.0/main.global.min.js")https://cdn.jsdelivr.net/npm/@@fullcalendar/interaction@5.10.0/main.global.min.js" integrity="sha384-k5EktxtBlEAe1ehYBBLobJqnqScN2WLQEkrgewQQosY0X6abvPs1+HC1v9z1Od9+" crossorigin="anonymous"></script>*@
+
+<script src="~/fullcalendar/lib/main.js"></script>
+<script src="~/fullcalendar/lib/locales/sv.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+
+@section Scripts {
+
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.searchableDropDown').select2();
+        });
+    </script>
+}
+
+
+
+
+
+<script type="text/javascript">
+
+    //Get all boookings via ViewBag and replace the &quot; with "
+    let jsonBookings = "@ViewBag.BookingDates";
+    jsonBookings = JSON.parse(jsonBookings.replace(/&quot;/g, '"'));
+
+    // Create new empty array that will contain all the bookings
+    let bookingsTimes = new Array();
+
+    // Go through the jsonBookings and render the info into a format that fullcalendar wants
+    function renderEvents() {
+
+    for (var i = 0; i < jsonBookings.length; i++) {
+
+    for (const property in jsonBookings[i]) {
+
+    if (property === "Start") {
+    bookingsTimes[i] = {
+    "title": "Bokat",
+    "start": jsonBookings[i][property],
+    "end": jsonBookings[i]["End"],
+    //"constraint": {
+    //    startTime: "07:00",
+    //    endTime: "19:00",
+    //},
+    }
+    }
+    }
+
+    }
+    return bookingsTimes;
+    }
+    console.log(bookingsTimes);
+
+    renderEvents();
+
+    //console.log(bookingsTimes)
+
+    /////// FLATPICKER DISABLED NOW WITH NEW FULLCALENDAR SOLUTION //////////
+    //config = {
+    //    enableTime: true,
+    //    dateFormat: "Y-m-d H:i",
+    //    time_24hr: true,
+    //    altInput: true,
+    //    minTime: "07:00",
+    //    maxTime: "19:00",
+    //    defaultHour: "07:00",
+    //    weekNumbers: true,
+    //    minuteIncrement: 30,
+    //    altFormat: "F j, Y (h:S)",
+    //    minDate: "today",
+    //    //disable: bookingsTimes,
+    //}
+
+    //flatpickr("input[type=datetime-local]", config);
+
+
+    //Get all elements needed
+    let calendarEl = document.getElementById('calendar');
+    let startTime = document.getElementById('start_time');
+    let endTime = document.getElementById('end_time');
+    let clearBooking = document.getElementById('clear_booking');
+    let confirmStarttime = document.getElementById('confirm_starttime')
+    let confirmEndtime = document.getElementById('confirm_endtime')
+
+
+    function initCalendar(manyEvents) {
+    let calendar = new FullCalendar.Calendar(calendarEl, {
+    // Basic settings for the calendar
+    locale: 'sv',
+    themeSystem: 'bootstrap',
+    selectable: true,
+    selectMirror: true,
+    selectOverlap: false,
+    unselectAuto: false,
+    allDaySlot: false,
+    initialView: 'timeGridWeek',
+    longPressDelay: 300,
+
+
+    headerToolbar: {
+    left: 'prev,next today',
+    center: 'title',
+    right: 'dayGridMonth, timeGridWeek,timeGridDay'
+    },
+
+
+    eventTimeFormat: {
+    hour: '2-digit',
+    minute: '2-digit',
+    meridiem: false,
+    },
+
+
+    //eventConstraint: {
+    //    startTime: "07:00",
+    //    endTime:"19:00",
+    //},
+
+    // Custom select function. Works with both dayGrid and time Grid
+    select: function (info) {
+    var now = new Date();
+    var morningOpeningHour = 07;
+    var EveningClosingHour = 19;
+    var startTimeHour = info.start.getHours();
+    var endTimeHour = info.end.getHours();
+
+    if (info.start > now) {
+
+    if (info.view.type === "dayGridMonth") {
+    allDaySlot = true;
+
+    if (info.end instanceof Date) {
+    info.start.setDate(info.start.getDate() + 1);
+
+    let dStart = info.start.toISOString().slice(0, 10) + "T07:00";
+    let dEnd = info.end.toISOString().slice(0, 10) + "T19:00";
+
+    startTime.value = dStart;
+    endTime.value = dEnd;
+    confirmStarttime.value = dStart;
+    confirmEndtime.value = dEnd;
+    }
+
+    }
+    else {
+    if (startTimeHour >= morningOpeningHour && endTimeHour <= EveningClosingHour) {
+    startTime.value = info.startStr.slice(0, 19);
+    endTime.value = info.endStr.slice(0, 19);
+    confirmStarttime.value = info.startStr.slice(0, 19);
+    confirmEndtime.value = info.endStr.slice(0, 19);
+    }
+    else {
+    calendar.unselect();
+    }
+    }
+    }
+    else {
+    calendar.unselect();
+    }
+
+    },
+
+    // manyEvents is the parameter sent in at the function call.
+    events: manyEvents,
+
+    });
+
+    //Main call to render the whole thing
+    calendar.render();
+
+    //Clear booking is the button. Add an eventlistener to it and null the values on the inputs, and unselect the times in the calendar.
+    clearBooking.addEventListener("click", function () {
+    startTime.value = null;
+    endTime.value = null;
+    calendar.unselect();
+    });
+    }
+
+
+    initCalendar(bookingsTimes);
+
+
+</script>
+
+
+
+

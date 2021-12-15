@@ -1,0 +1,57 @@
+﻿@model docside_bookingview_2.Areas.Identity.Data.User
+
+
+@{
+    ViewData["Title"] = "Radera användare";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+
+        <h4 class="pt-5 create-title">RADERA ANVÄNDARE.</h4>
+        <hr />
+
+        <h5>Vill du verkligen radera denna användare?</h5>
+
+        <dl class="row">
+
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt class="col-sm-3">
+                @*@Html.DisplayNameFor(model => model.PhoneNumber)*@
+                Telefonnummer
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Radera" class="btn btn-danger mt-3" />
+            <a asp-action="Index" class="btn btn-secondary mt-3 ml-3">Ångra</a>
+        </form>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,44 @@
+﻿@model docside_bookingview_2.Models.Company
+
+
+
+
+<div class="row">
+    <div class="col-10 offset-1 col-md-4 offset-md-3">
+        <form asp-action="Create" method="post">
+            <h4 class="pt-5 create-title">SKAPA ETT NYTT FÖRETAG.</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="strCompanyName"></label>
+                <input asp-for="strCompanyName" class="form-control" placeholder="*Obligatorisk" />
+                <span asp-validation-for="strCompanyName" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="dblDiscount"></label>
+                <input asp-for="dblDiscount" class="form-control" />
+                <span asp-validation-for="dblDiscount" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="OrganisationsNummer"></label>
+                <input asp-for="OrganisationsNummer" class="form-control" placeholder="*Obligatorisk" />
+                <span asp-validation-for="OrganisationsNummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CompanyEmail"></label>
+                <input asp-for="CompanyEmail" class="form-control" placeholder="*Obligatorisk" />
+                <span asp-validation-for="CompanyEmail" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary mt-3">Skapa</button>
+                <a asp-action="Index" class="btn btn-secondary mt-3 ml-3">Ångra</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

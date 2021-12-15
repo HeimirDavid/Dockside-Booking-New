@@ -1,0 +1,58 @@
+﻿@model List<Booking>
+
+
+@{ ViewData["Title"] = "Radera bokning"; }
+
+
+
+<div class="row">
+    <div class="col-10 offset-1 col-md-6 offset-md-3">
+
+        <h4 class="pt-5 create-title">RADERA BOKNING.</h4>
+        <hr />
+
+        <h5>Vill du verkligen radera denna bokning?</h5>
+
+        <dl class="row">
+            <dt class="col-md-3 col-4">
+                @Html.DisplayNameFor(model => model[0].Id)
+            </dt>
+            <dd class="col-md-9 col-6">
+                @Html.DisplayFor(model => model[0].Id)
+            </dd>
+            <dt class="col-md-3 col-4">
+                @Html.DisplayNameFor(model => model[0].User.Email)
+            </dt>
+            <dd class="col-md-9 col-6">
+                @Html.DisplayFor(model => model[0].User.Email)
+            </dd>
+            <dt class="col-md-3 col-4">
+                @Html.DisplayNameFor(model => model[0].Room.strRoomName)
+            </dt>
+            <dd class="col-md-9 col-6">
+                @Html.DisplayFor(model => model[0].Room.strRoomName)
+            </dd>
+            <dt class="col-md-3 col-4">
+                @Html.DisplayNameFor(model => model[0].datStartBooking)
+            </dt>
+            <dd class="col-md-9 col-6">
+                @Model[0].datStartBooking.ToShortDateString() kl: @Model[0].datStartBooking.ToShortTimeString()
+                @*@Html.DisplayFor(model => model[0].datStartBooking)*@
+            </dd>
+            <dt class="col-md-3 col-4">
+                @Html.DisplayNameFor(model => model[0].datEndBooking)
+            </dt>
+            <dd class="col-md-9 col-6">
+                @Model[0].datEndBooking.ToShortDateString() kl: @Model[0].datEndBooking.ToShortTimeString()
+                @*@Html.DisplayFor(model => model[0].datEndBooking)*@
+            </dd>
+
+
+        </dl>
+
+
+        <a asp-action="Delete" asp-route-id="@Model[0].Id" class="btn btn-danger mt-3">Radera</a>
+        <a asp-action="AdminBookingList" class="btn btn-secondary mt-3 ml-3">Ångra</a>
+
+    </div>
+</div>

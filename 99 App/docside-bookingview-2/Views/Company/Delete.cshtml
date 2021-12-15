@@ -1,0 +1,52 @@
+﻿@model docside_bookingview_2.Models.Company
+
+
+@{
+    ViewData["Title"] = "Radera bolag";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+
+        <h4 class="pt-5 create-title">RADERA FÖRETAG.</h4>
+        <hr />
+
+        <h5>Vill du verkligen radera detta företag?</h5>
+
+        <dl class="row">
+
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.strCompanyName)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.strCompanyName)
+            </dd>
+            @*<dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.dblDiscount)
+            </dt>*@
+            @*<dd class="col-sm-9">
+                @Html.DisplayFor(model => model.dblDiscount)
+            </dd>*@
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.OrganisationsNummer)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.OrganisationsNummer)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.CompanyEmail)
+            </dt>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Radera" class="btn btn-danger mt-3" />
+            <a asp-action="Index" class="btn btn-secondary mt-3 ml-3">Ångra</a>
+        </form>
+    </div>
+</div>
+
+
+
+

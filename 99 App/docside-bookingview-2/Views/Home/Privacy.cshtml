@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore
+@using docside_bookingview_2.Areas.Identity.Data
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+@if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+            {
+                <h1>HOLE SHIT THIS IS AN ADMIN</h1>
+            } else
+            {
+                <h1>SAD FACE, Not an admin :(</h1>
+            }
+
+<p>Use this page to detail your site's privacy policy.</p>

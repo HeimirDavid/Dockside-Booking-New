@@ -1,0 +1,66 @@
+﻿@model docside_bookingview_2.Models.Company
+
+@{
+    ViewData["Title"] = "Detaljer";
+    string classAvailable = "";
+}
+
+@if (Model.Active)
+{
+    classAvailable = "classAvailable fas fa-check-circle";
+}
+else
+{
+    classAvailable = "classNotAvailable fas fa-exclamation-circle";
+}
+
+
+
+<div class="row">
+    <div class="col-10 offset-1 col-md-6 offset-md-3">
+        <h4 class="pt-5 create-title">FÖRETAGETS DETALJER.</h4>
+        <hr />
+
+        <dl class="row">
+            <dt class="col-md-3 col-6">
+                @Html.DisplayNameFor(model => model.strCompanyName)
+            </dt>
+            <dd class="col-md-9 col-6">
+                @Html.DisplayFor(model => model.strCompanyName)
+            </dd>
+            @*<dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.dblDiscount)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.dblDiscount)
+        </dd>*@
+            <dt class="col-md-3 col-6">
+                @Html.DisplayNameFor(model => model.OrganisationsNummer)
+            </dt>
+            <dd class="col-md-9 col-6">
+                @Html.DisplayFor(model => model.OrganisationsNummer)
+            </dd>
+            <dt class="col-md-3 col-6">
+                @Html.DisplayNameFor(model => model.CompanyEmail)
+            </dt>
+            <dd class="col-md-9 col-6">
+                @Html.DisplayFor(model => model.CompanyEmail)
+            </dd>
+            <dt class="col-md-3 col-6">
+                @Html.DisplayNameFor(model => model.Active)
+            </dt>
+            <dd class="col-md-9 col-6">
+                @*@Html.DisplayFor(model => model.Available ? "Ja" : "Nej")*@
+                @*@(Model.Available ? "Ja" : "Nej")*@
+                <i class="@classAvailable"></i>
+            </dd>
+
+        </dl>
+
+        <div class="form-group">
+            <a asp-action="Index" class="btn btn-secondary">Tillbaka</a>
+        </div>
+
+    </div>
+</div>
+

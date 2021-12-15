@@ -1,0 +1,187 @@
+﻿<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a asp-controller="Home" asp-action="Index" class="brand-link">
+        <img src="http://www.docksideoffice.se/wp-content/uploads/2019/09/weblogo_dockside.png" alt="AdminLTE Logo" class="brand-image " style="opacity: .8">
+        <span class="brand-text font-weight-light">Admin</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        @*<ul class="navbar-nav">
+            <li class="nav-item">
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button id="logout" type="submit" class="nav-link btn btn-primary logout-button">Logga ut</button>
+                </form>
+            </li>
+        </ul>*@
+            <!--<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+            <img src="~/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+            <a href="#" class="d-block">Alexander Pierce</a>
+        </div>
+        </div>-->
+            <!-- SidebarSearch Form -->
+            @*<div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>*@
+
+            <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+                @*<li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                    Starter Pages
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Active Page</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Inactive Page</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../forms/general.html" class="nav-link active">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>General Elements</p>
+                    </a>
+                </li>
+            </ul>
+        </li>*@
+
+                
+                @* Boka - Boka - Boka - Boka - Boka - Boka - Boka - Boka - Boka - Boka - Boka - Boka *@
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-calendar"></i>
+                        <p>
+                            Bokningar
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Booking" asp-action="Index">
+                                <i class="far fa-calendar-check nav-icon"></i>
+                                <p>Boka</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Booking" asp-action="AdminBookingList">
+                                <i class="far fa-eye nav-icon"></i>
+                                <p>Lista</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+
+                @*VIEW - VIEW -VIEW -VIEW -VIEW -VIEW -VIEW -VIEW -VIEW -VIEW -VIEW -VIEW -VIEW -VIEW*@
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-eye"></i>
+                        <p>
+                            Visa
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="User" asp-action="Index">
+                                <i class="far fa-user nav-icon"></i>
+                                <p>Användare</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Company" asp-action="Index">
+                                <i class="far fa-building nav-icon"></i>
+                                <p>Företag</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Rooms" asp-action="Index">
+                                <i class="fas fa-door-open nav-icon"></i>
+                                <p>Rum</p>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
+
+                @*LÄGG TILL - LÄGG TILL -LÄGG TILL -LÄGG TILL -LÄGG TILL -LÄGG TILL -LÄGG TILL -LÄGG TILL*@
+                <li class="nav-item menu-open">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fas fa-plus"></i>
+                        <p>
+                            Lägg till
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">
+                                <i class="far fa-user nav-icon"></i>
+                                <p>Användare</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Company" asp-action="Create">
+                                <i class="far fa-building nav-icon"></i>
+                                <p>Företag</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Rooms" asp-action="Create">
+                                <i class="fas fa-door-open nav-icon"></i>
+                                <p>Rum</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                @*<li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                    Simple Link
+                    <span class="right badge badge-danger">New</span>
+                </p>
+            </a>
+        </li>*@
+            </ul>
+
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <button id="logout" type="submit" class="nav-link btn btn-danger logout-button"><i class=" mr-2 fas fa-arrow-circle-left"></i> Logga ut</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    <!-- /.sidebar-menu -->
+</div>
+    <!-- /.sidebar -->
+</aside>

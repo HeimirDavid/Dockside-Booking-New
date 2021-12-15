@@ -1,0 +1,26 @@
+﻿<nav class="navbar navbar-expand-md navbar-toggleable-md navbar-light bg-white border-bottom box-shadow">
+    <div class="container">
+        <a href="https://www.docksideoffice.se/" target="_blank"><img src="http://www.docksideoffice.se/wp-content/uploads/2019/09/weblogo_dockside.png" alt="Dockside Office Coworking" id="logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-home nav-icon"></i> Hem</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Booking" asp-action="Index"><i class="fas fa-door-open"></i> Våra rum</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-controller="Home" asp-action="Contact"><i class="fas fa-phone"></i></i> Kontakt</a>
+                </li>
+                @*<li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </li>*@
+                <partial name="_LoginPartial.cshtml" />
+            </ul>
+        </div>
+    </div>
+</nav>

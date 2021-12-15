@@ -1,0 +1,101 @@
+﻿@model docside_bookingview_2.Models.Room
+
+
+@{
+    ViewData["Title"] = "Radera rum";
+    string classAvailable = "";
+}
+
+@if (Model.Available)
+{
+    classAvailable = "classAvailable fas fa-check-circle";
+}
+else
+{
+    classAvailable = "classNotAvailable fas fa-exclamation-circle";
+}
+
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+
+        <h4 class="pt-5 create-title">RADERA RUM.</h4>
+        <hr />
+
+        <h5>Vill du verkligen radera detta rum?</h5>
+
+        <dl class="row">
+
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.strRoomName)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.strRoomName)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.dcmWholeDay)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.dcmWholeDay)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.dcmHalfDay)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.dcmHalfDay)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.dcmHour)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.dcmHour)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.dcmInternalDiscount)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.dcmInternalDiscount)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.SquareMetres)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.SquareMetres)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.MaxPeople)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.MaxPeople)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Floor)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.Floor)
+            </dd>
+
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.Available)
+            </dt>
+            <dd class="col-sm-9">
+                @*@Html.DisplayFor(model => model.Available ? "Ja" : "Nej")*@
+                @*@(Model.Available ? "Ja" : "Nej")*@
+                <i class="@classAvailable"></i>
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Radera" class="btn btn-danger mt-3" />
+            <a asp-action="Index" class="btn btn-secondary mt-3 ml-3">Ångra</a>
+        </form>
+    </div>
+</div>
+
+
+
+
+

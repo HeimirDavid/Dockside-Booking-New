@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using docside_bookingview_2.Areas.Identity.Data
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+<ul class="navbar-nav ml-md-auto">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        // Only admins can create new users
+        @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </li>
+        }
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Booking" asp-action="UserBookings"><i class="far fa-calendar-check nav-icon"></i> Mina Bokningar</a>
+        </li>
+
+        @*<li class="nav-item">
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserAsync(User).Result.FirstName!</a>
+        </li>*@
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-light text-light user-logout-btn"><i class=" mr-2 fas fa-arrow-circle-left"></i>Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        //Only shown in admin mode
+        @*<li class="nav-item">
+                    <a class="nav-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </li>*@
+
+
+        @*<li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="login" type="submit" class="nav-link btn btn-danger logout-button text-light"><i class=" mr-2 fas fa-arrow-circle-right"></i> Logga in</button>
+            </form>
+        </li>*@
+
+
+        <li class="nav-item">
+            <a class="nav-link btn btn-primary text-light" id="login" asp-area="Identity" asp-page="/Account/Login"><i class=" mr-2 fas fa-arrow-circle-right"></i>Logga in</a>
+        </li>
+    }
+</ul>

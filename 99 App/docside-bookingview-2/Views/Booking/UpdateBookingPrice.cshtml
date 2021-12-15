@@ -1,0 +1,65 @@
+﻿@model docside_bookingview_2.ViewModels.InfoForUpdatePrice
+
+
+
+<div class="row">
+    <div class="col-10 offset-1 col-md-4 offset-md-3">
+        <h4 class="pt-5 create-title">UPPDATERA PRIS.</h4>
+        <hr />
+        <h5>Här får du som Admin möjlighet att ändra bokningspriset</h5>
+        <h5 class="text-danger mb-3">Var extra försiktig</h5>
+        <dl class="row">
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.BookingId)
+            </dt>
+            <dd class="col-md-8 col-4">
+                @Html.DisplayFor(model => model.BookingId)
+            </dd>
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.UserFirstName)
+            </dt>
+            <dd class="col-md-8 col-4">
+                @Html.DisplayFor(model => model.UserFirstName)
+            </dd>
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.UserLastName)
+            </dt>
+            <dd class="col-md-8 col-4">
+                @Html.DisplayFor(model => model.UserLastName)
+            </dd>
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </dt>
+            <dd class="col-md-8 col-4">
+                @Html.DisplayFor(model => model.CompanyName)
+            </dd>
+
+           
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd class="col-md-8 col-4">
+              
+                @Model.StartDate.ToShortDateString() kl: @Model.StartDate.ToShortTimeString()
+            </dd>
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+            <dd class="col-md-8 col-4">
+                @Model.EndDate.ToShortDateString() kl: @Model.EndDate.ToShortTimeString()
+            </dd>
+        </dl>
+        <form class="mt-5" asp-controller="Booking" asp-action="UpdateBookingPrice" method="post">
+            <div class="form-group">
+                <label>
+                    Uppdatera priset här.
+                    <input placeholder="Befintligt Pris: @Model.Price kr" name="special_price" id="special_price" type="number" class="form-control mt-2" />
+                    <input hidden name="booking_id" id="booking_id" value="@Model.BookingId" type="number" class="form-control" />
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Bekräfta</button>
+            <a asp-action="AdminBookingList" class="btn btn-secondary ml-3">Ångra</a>
+        </form>
+        <p></p>
+    </div>
+</div>

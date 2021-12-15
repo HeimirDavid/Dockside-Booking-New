@@ -1,0 +1,131 @@
+﻿@model docside_bookingview_2.Models.Room
+
+@using Microsoft.AspNetCore.Identity
+@using docside_bookingview_2.Areas.Identity.Data
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = "Detaljer";
+    string classAvailable = "";
+}
+
+
+
+@if (Model.Available)
+{
+    classAvailable = "classAvailable fas fa-check-circle";
+}
+else
+{
+    classAvailable = "classNotAvailable fas fa-exclamation-circle";
+}
+
+
+<div class="row">
+    <div class="col-10 offset-1 col-md-4 offset-md-3">
+        <h4 class="pt-5 create-title">RUM DETALJER.</h4>
+        <hr />
+
+        <dl class="row">
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.strRoomName)
+            </dt>
+            <dd class="col-md-8 col-4">
+                @Html.DisplayFor(model => model.strRoomName)
+            </dd>
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.dcmWholeDay)
+            </dt>
+            <dd class="col-md-8 col-4">
+                @Html.DisplayFor(model => model.dcmWholeDay)
+            </dd>
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.dcmHalfDay)
+            </dt>
+            <dd class="col-md-8 col-4">
+                @Html.DisplayFor(model => model.dcmHalfDay)
+            </dd>
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.dcmHour)
+            </dt>
+            <dd class="col-md-8 col-4">
+                @Html.DisplayFor(model => model.dcmHour)
+            </dd>
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.dcmInternalDiscount)
+            </dt>
+            <dd class="col-md-8 col-4">
+                @Html.DisplayFor(model => model.dcmInternalDiscount) %
+            </dd>
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.SquareMetres)
+            </dt>
+            <dd class="col-md-8 col-4">
+                @Html.DisplayFor(model => model.SquareMetres) m&sup2;
+            </dd>
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.MaxPeople)
+            </dt>
+            <dd class="col-md-8 col-4">
+                @Html.DisplayFor(model => model.MaxPeople)
+            </dd>
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.Floor)
+            </dt>
+            <dd class="col-md-8 col-4">
+                @Html.DisplayFor(model => model.Floor)
+            </dd>
+            <dt class="col-md-4 col-6">
+                @Html.DisplayNameFor(model => model.Available)
+            </dt>
+            <dd class="col-md-8 col-4">
+                @*@Html.DisplayFor(model => model.Available ? "Ja" : "Nej")*@
+                @*@(Model.Available ? "Ja" : "Nej")*@
+                <i class="@classAvailable"></i>
+            </dd>
+
+        </dl>
+        @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "admin"))
+        {
+            <div class="form-group">
+                <a asp-controller="Booking" asp-action="Index" class="btn btn-secondary">Tillbaka</a>
+            </div>
+        }
+        else
+        {
+            <div class="form-group">
+                <a asp-controller="Booking" asp-action="Index" class="btn btn-secondary">Tillbaka</a>
+            </div>
+        }
+        <!--<div class="col-md-6">-->
+        @*<h4>ImageModel</h4>
+            <hr />*@
+        <!--<dl class="row">-->
+        @*<dt class="col-md-2">
+                @Html.DisplayNameFor(model => model.ImageTitle)
+            </dt>
+            <dd class="col-md-10">
+                @Html.DisplayFor(model => model.ImageTitle)
+            </dd>
+            <dt class="col-md-2">
+                Uploaded Image
+            </dt>*@
+        <!--<dd class="col-md-10">
+                    <img src="@("~/image/"+Model.ImageName)" asp-append-version="true" width="250" height="250">
+                </dd>
+            </dl>
+        </div>-->
+
+    </div>
+    <div class="col-10 offset-1 col-md-5 offset-md-0 mb-5">
+        <h4 class="pt-5 create-title">RUMSBILD.</h4>
+        <hr />
+        <div class="col-md-10">
+            <img class="room-image" src="@("~/image/"+Model.ImageName)" asp-append-version="true">
+        </div>
+
+    </div>
+</div>
+

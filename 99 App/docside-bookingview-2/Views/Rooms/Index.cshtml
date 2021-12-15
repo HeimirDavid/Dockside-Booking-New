@@ -1,0 +1,163 @@
+﻿@model IEnumerable<docside_bookingview_2.Models.Room>
+
+@{
+    ViewData["Title"] = "Visa Rum";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-10 offset-1 col-md-8 offset-md-3">
+        <div>
+            <h4 class="pt-5 create-title">VÅRA RUM.</h4>
+            <hr />
+
+
+            @if (Model.Count() > 0)
+            {
+                <div class="table-responsive pb-3">
+                    <table class="table table-bordered table-striped data-tables" style="width:100%" id="rooms">
+                        <thead>
+                            <tr>
+                                <th>Namn</th>
+                                <th>Kvadratmeter</th>
+                                <th>Max Antal Personer</th>
+                                <th>Våning</th>
+                                <th>Aktiv</th>
+                                <th>Hantera</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                string classAvailable = "";
+                                if (item.Available)
+                                {
+                                    classAvailable = "classAvailable fas fa-2x fa-check-circle";
+                                }
+                                else
+                                {
+                                    classAvailable = "classNotAvailable fas fa-2x fa-exclamation-circle";
+                                }
+                                <tr>
+                                    <td width="20%">@item.strRoomName</td>
+                                    <td width="15%">@item.SquareMetres</td>
+                                    <td width="20%">@item.MaxPeople</td>
+                                    <td width="10%">@item.Floor</td>
+                                    <td width="10%"><i class="@classAvailable"></i></td>
+
+                                    <td width="11%">
+                                        <a asp-action="EditRooms" asp-route-id="@item.Id"><i class="fas fa-2x fa-pen-square mr-2"></i></a>
+                                        <a asp-action="DetailsAdmin" asp-route-id="@item.Id"><i class="fas fa-2x fa-info-circle mr-2"></i></a>
+                                        @*<a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-2x fa-trash-alt mr-2 delete"></i></a>*@
+                                    </td>
+
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p>Det finns inga rum registrerade</p>
+            }
+        </div>
+    </div>
+</div>
+
+@*DATA TABLES -------------------------------------------------------------------*@
+@*DATA TABLES -------------------------------------------------------------------*@
+@*DATA TABLES -------------------------------------------------------------------*@
+@*DATA TABLES -------------------------------------------------------------------*@
+@*DATA TABLES -------------------------------------------------------------------*@
+
+@*Links*@
+@*https://www.youtube.com/watch?v=u147Q0NY6Qg&ab_channel=CodAffection*@
+@*https://www.youtube.com/watch?v=2HliDQ4bfIA&ab_channel=CodAffection*@
+@*https://datatables.net/extensions/buttons/examples/initialisation/export.html*@
+@*https://datatables.net/examples/basic_init/language.html*@
+@*https://datatables.net/reference/option/language.paginate.previous*@
+
+<link rel="stylesheet" href="~/css/customStyles.css" />
+
+
+@*Data tables - CSS*@
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" />
+
+@*Needed for export buttons*@
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css" />
+
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+    @*Data tables - CDN*@
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+
+    @*Needed for export buttons*@
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
+
+
+    @*Data tables - Initializing data table*@
+    <script>
+        $(document).ready(function () {
+            $('#rooms').DataTable({
+                "dom": "Bfrtip",
+                "buttons": [
+                    {
+                        title: "Dockside-Kontorshotell",
+                        extend: 'copy',
+                        className: 'copyButton btn btn-primary text-white',
+                        text: '<i class="fa fa-clone"></i> Kopiera'
+                    },
+                    {
+                        title: "Dockside-Kontorshotell",
+                        extend: 'excel',
+                        className: 'excelButton btn btn-primary text-white',
+                        text: '<i class="fa fa-file-excel"></i> Excel'
+                    },
+                    {
+                        title: "Dockside-Kontorshotell",
+                        extend: 'pdf',
+                        className: 'pdfButton btn btn-primary text-white',
+                        text: '<i class="fa fa-file-pdf"></i> PDF'
+                    },
+                    {
+                        title: "Dockside-Kontorshotell",
+                        extend: 'print',
+                        className: 'printButton btn btn-primary text-white',
+                        text: '<i class="fa fa-print"></i> Skriv ut'
+                    },
+                ],
+                "language": {
+                    "lengthMenu": "Visa _MENU_ rader per sida",
+                    "search": "Sök",
+                    "zeroRecords": "Ingenting hittat",
+                    "info": "Visa sida _PAGE_ av _PAGES_",
+                    "infoEmpty": "Inga rader tillgängliga",
+                    "infoFiltered": "(filtrerad från _MAX_ total rader)",
+                    "paginate": {
+                        "previous": '<i class="fa fa-1.5x fa-arrow-circle-left"></i> Föregående',
+                        "next": '<i class="fa fa-1.5x fa-arrow-circle-right"></i> Nästa',
+                    }
+                }
+            });
+        });
+    </script>
+
+}

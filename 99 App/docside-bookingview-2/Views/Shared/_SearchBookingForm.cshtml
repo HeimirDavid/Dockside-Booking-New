@@ -1,0 +1,44 @@
+﻿
+<h3 class="create-title">Sök efter lediga rum</h3>
+<hr />
+<form asp-controller="Booking" asp-action="SearchBooking" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group text-left">
+        <label>Starttid</label>
+        <input type="datetime-local" id="starTime" name="startTime" placeholder="Välj startdatum och tid"></" class="form-control" />
+
+    </div>
+    <div class="form-group text-left">
+        <label>Sluttid</label>
+        <input type="datetime-local" id="endTime" name="endTime" placeholder="Välj slutdatum och tid"></" class="form-control" />
+    </div>
+
+
+    @*<input hidden asp-for="Room.Id" class="form-control" />*@
+
+
+    <button type="submit" class="btn btn-primary btn-clear-booking mb-4">Sök</button>
+
+</form>
+
+<!-- Flatpickr -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    config = {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        time_24hr: true,
+        altInput: true,
+        minTime: "07:00",
+        maxTime: "19:00",
+        defaultHour: "07:00",
+        weekNumbers: true,
+        minuteIncrement: 30,
+        altFormat: "F j, Y (h:S)",
+        minDate: "today",
+        //disable: bookingsTimes,
+    }
+
+    flatpickr("#starTime", config);
+    flatpickr("#endTime", config);
+</script>

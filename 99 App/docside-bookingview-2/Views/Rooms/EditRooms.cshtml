@@ -1,0 +1,141 @@
+﻿@model docside_bookingview_2.Models.Room
+
+
+@{
+    ViewData["Title"] = "Editera rum";
+}
+
+@{
+    System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("sv-se", true);
+    culture.NumberFormat.NumberDecimalSeparator = ",";
+    System.Threading.Thread.CurrentThread.CurrentCulture = culture;
+    System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+}
+
+
+<form asp-action="EditRooms" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-10 offset-1 col-md-4 offset-md-3">
+            <h4 class="pt-5 create-title">EDITERA RUM.</h4>
+            <hr />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ImageName" />
+            <div class="form-group">
+                <label asp-for="strRoomName" class="control-label"></label>
+                <input asp-for="strRoomName" class="form-control" />
+                <span asp-validation-for="strRoomName" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="dcmWholeDay" class="control-label"></label>
+                <input asp-for="dcmWholeDay" class="form-control" />
+                <span asp-validation-for="dcmWholeDay" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="dcmHalfDay" class="control-label"></label>
+                <input asp-for="dcmHalfDay" class="form-control" />
+                <span asp-validation-for="dcmHalfDay" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="dcmHour" class="control-label"></label>
+                <input asp-for="dcmHour" class="form-control" />
+                <span asp-validation-for="dcmHour" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="dcmInternalDiscount" class="control-label"></label>
+                <input asp-for="dcmInternalDiscount" class="form-control" />
+                <span asp-validation-for="dcmInternalDiscount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SquareMetres" class="control-label"></label>
+                <input asp-for="SquareMetres" class="form-control" />
+                <span asp-validation-for="SquareMetres" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MaxPeople" class="control-label"></label>
+                <input asp-for="MaxPeople" class="form-control" />
+                <span asp-validation-for="MaxPeople" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <label asp-for="Floor"></label><br />
+                <select asp-for="Floor">
+                    <option value="1" selected>Våning 1</option>
+                    <option value="3">Våning 3</option>
+                </select>
+            </div>
+
+            <div>
+                <label asp-for="Available" class="mt-3 mb-3">
+                    Aktiv
+                    <input asp-for="Available" type="checkbox">
+                </label>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Uppdatera" class="btn btn-primary mt-3" />
+                <a asp-action="Index" class="btn btn-secondary mt-3 ml-3">Tillbaka</a>
+            </div>
+
+        </div>
+        <div class="col-10 offset-1 col-md-5 offset-md-0">
+            <h4 class="pt-5 create-title">RUMSBILD.</h4>
+            <hr />
+            <div class="col-sm-10">
+                <img class="room-image" src="@("~/image/"+Model.ImageName)" asp-append-version="true">
+            </div>
+
+            <label class="ml-2 mt-2">
+                Byt bild
+                <input type="checkbox" id="change_image" />
+            </label>
+            <div class="form-group" id="image_file">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" accept="image/*" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</form>
+
+<br />
+<br />
+
+<script>
+    let checkbox = document.getElementById("change_image")
+    /*let imageName = document.getElementById("image_name")*/
+    let imageFile = document.getElementById("image_file")
+
+    imageFile.style.display = "none";
+
+    checkbox.addEventListener('change', function () {
+        if (this.checked) {
+            /*console.log("Checkbox is checked..");*/
+            /*imageName.style.display = "none";*/
+            imageFile.style.display = "block";
+        } else {
+            /*console.log("Checkbox is not checked..");*/
+            imageFile.style.display = "none";
+            /*imageName.style.display = "block";*/
+        }
+    });
+
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

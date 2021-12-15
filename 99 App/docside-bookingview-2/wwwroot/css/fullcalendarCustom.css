@@ -1,0 +1,29 @@
+﻿
+
+.btn-group .fc-timeGridWeek-button.btn.btn-primary.active,
+.btn-group .fc-dayGridMonth-button.btn.btn-primary.active,
+.btn-group .fc-timeGridDay-button.btn.btn-primary.active {
+    opacity: 0.6;
+}
+
+.calendar-booking-row {
+    margin-bottom: 10em; 
+}
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #338FBC !important;
+    border-color: #338FBC !important;
+    box-shadow: none;
+}
+
+.btn-clear-booking {
+    background-color: #F07E3F;
+    border-color: #F07E3F;
+}
+
+.btn-clear-booking:hover {
+    background-color: #fa9f6e;
+    border-color: #fa9f6e;
+}
